@@ -1,16 +1,17 @@
-#JavaEE7 and Payara Micro RESTFul example with Basic Authentication and Arquillian Test Suite
+# JavaEE7 and Payara Micro RESTFul example with Basic Authentication and Arquillian Test Suite
 
-##Index
-[1. **Prerequisites**](#1.prequisites)
-[2. **Running instructions**](#2.running-instructions)
+## Index
+
+1. **Prerequisites**
+2. **Running instructions**
 3. **API Documentation**
 
-##1.Prerequisites
+## 1.Prerequisites
 
 * Java 7+ JDK
 * MySQL
 
-##2.Running Instructions
+## 2.Running Instructions
 
 1. Clone project https://github.com/felipe-dibernardi/javaee-payara-micro.git
 
@@ -22,11 +23,11 @@
 
 5. Run **java -jar {{APPLICATION\_NAME}}.jar**
 
-##3. API Documentation
+## 3. API Documentation
 
-###3.1. Users
+### 3.1. Users
 
-####3.1.1. List All Users
+#### 3.1.1. List All Users
 
 Get a list of all Users.
 
@@ -47,7 +48,7 @@ Get a list of all Users.
 
    * **Code:** 401 UNAUTHORIZED
 
-####3.1.2. Find User by Id
+#### 3.1.2. Find User by Id
 
 Find a User by Id.
 
@@ -74,7 +75,7 @@ Find a User by Id.
 
    * **Code:** 401 UNAUTHORIZED
 
-####3.1.3. Find User by Username
+#### 3.1.3. Find User by Username
 
 Find a User by Username.
 
@@ -101,7 +102,7 @@ Find a User by Username.
 
    * **Code:** 401 UNAUTHORIZED
 
-####3.1.4. Post User
+#### 3.1.4. Post User
 
    Insert a new User.
 
@@ -128,7 +129,7 @@ Find a User by Username.
 
       * **Code:** 500 INTERNAL SERVER ERROR
 
-####3.1.5. Put User
+#### 3.1.5. Put User
 
    Update a User.
 
@@ -155,7 +156,7 @@ Find a User by Username.
 
       * **Code:** 500 INTERNAL SERVER ERROR
 
-####3.1.6. Remove User
+#### 3.1.6. Remove User
 
    Delete a User.
 
