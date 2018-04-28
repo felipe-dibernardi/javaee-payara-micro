@@ -7,7 +7,7 @@ package br.com.fthiago.condominio.ws;
 
 import br.com.fthiago.condominio.entity.Resident;
 import br.com.fthiago.condominio.exception.BusinessException;
-import br.com.fthiago.condominio.filter.ResidentFilter;
+import br.com.fthiago.condominio.search.ResidentFilter;
 import br.com.fthiago.condominio.service.ResidentService;
 import java.util.List;
 import javax.ejb.EJB;

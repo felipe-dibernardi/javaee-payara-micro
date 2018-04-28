@@ -7,16 +7,20 @@
  * Author:  felipe
  * Created: Apr 27, 2018
  */
+DROP SCHEMA IF EXISTS condominium;
 CREATE SCHEMA condominium;
 
+DROP SCHEMA IF EXISTS condominium_test;
 CREATE SCHEMA condominium_test;
 
+DROP USER IF EXISTS 'condominium'@'localhost';
 CREATE USER 'condominium'@'localhost' identified by 'c0nd0';
 
 GRANT ALL ON condominium.* TO 'condominium'@'localhost';
 
 GRANT ALL ON condominium_test.* TO 'condominium'@'localhost';
 
+DROP TABLE IF EXISTS condominium.user;
 CREATE TABLE condominium.user (
     id INT(11) NOT NULL AUTO_INCREMENT,
     username VARCHAR(32) NOT NULL,
@@ -25,6 +29,7 @@ CREATE TABLE condominium.user (
     PRIMARY KEY (id)
 ) ENGINE=InnoDB;
 
+DROP TABLE IF EXISTS condominium_test.user;
 CREATE TABLE condominium_test.user (
     id INT(11) NOT NULL AUTO_INCREMENT,
     username VARCHAR(32) NOT NULL,
@@ -33,6 +38,7 @@ CREATE TABLE condominium_test.user (
     PRIMARY KEY (id)
 ) ENGINE=InnoDB;
 
+DROP TABLE IF EXISTS condominium.resident;
 CREATE TABLE condominium.resident (
     id INT(11) NOT NULL AUTO_INCREMENT,
     name VARCHAR(64) NOT NULL,
@@ -44,6 +50,7 @@ CREATE TABLE condominium.resident (
     PRIMARY KEY (id)
 ) ENGINE=InnoDB;
 
+DROP TABLE IF EXISTS condominium_test.resident;
 CREATE TABLE condominium_test.resident (
     id INT(11) NOT NULL AUTO_INCREMENT,
     name VARCHAR(64) NOT NULL,
@@ -55,6 +62,7 @@ CREATE TABLE condominium_test.resident (
     PRIMARY KEY (id)
 ) ENGINE=InnoDB;
 
+DROP VIEW IF EXISTS condominium.vi_user_type;
 CREATE VIEW condominium.vi_user_type AS SELECT username, type FROM condominium.user;
 
-INSERT INTO user (username, password, type) VALUES ('admin', MD5('admin'), 'ADMINISTRATOR');
+INSERT INTO condominium.user (username, password, type) VALUES ('admin', MD5('admin'), 'ADMINISTRATOR');

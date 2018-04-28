@@ -4,6 +4,6 @@
  * and open the template in the editor.
  */
 /**
- * Pacote contendo os filtros do sistema.
+ * Esse pacote contém os filtros de busca necessários para o sistema.
  */
-package br.com.fthiago.condominio.filter;
+package br.com.fthiago.condominio.search;

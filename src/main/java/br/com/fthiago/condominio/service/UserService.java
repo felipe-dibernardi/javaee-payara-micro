@@ -24,19 +24,19 @@ import javax.persistence.Query;
 public class UserService extends BaseService<User> {
 
     @Override
-    public User insert(User t) throws BusinessException {
+    public User insert(final User t) throws BusinessException {
         if (this.findByUsername(t.getUsername()) != null) {
-            throw new BusinessException(null, new ErrorMessage("Username already exists"));
+            throw new BusinessException(null, new ErrorMessage("Failure to insert. Username already exists."));
         }
         t.setPassword(MD5HashUtil.encript(t.getPassword()));
         return super.insert(t);
     }
 
     @Override
-    public User update(User t) throws BusinessException {
+    public User update(final User t) throws BusinessException {
         User user = this.findByUsername(t.getUsername());
         if (user != null && !user.getId().equals(t.getId())) {
-            throw new BusinessException(null, new ErrorMessage("Username already exists"));
+            throw new BusinessException(null, new ErrorMessage("Failure to update. Username already exists."));
         }
         return super.update(t);
     }

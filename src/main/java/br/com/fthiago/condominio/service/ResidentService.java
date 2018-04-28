@@ -7,7 +7,7 @@
 package br.com.fthiago.condominio.service;
 
 import br.com.fthiago.condominio.entity.Resident;
-import br.com.fthiago.condominio.filter.ResidentFilter;
+import br.com.fthiago.condominio.search.ResidentFilter;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.Query;

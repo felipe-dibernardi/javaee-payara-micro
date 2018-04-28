@@ -62,7 +62,7 @@ public class BaseService<T extends BaseEntity> {
             em.flush();
             return t;
         } catch (Exception e) {
-            throw new BusinessException(e.getLocalizedMessage(), new ErrorMessage("Erro ao inserir registro"));
+            throw new BusinessException(e.getLocalizedMessage(), new ErrorMessage("Failure to insert record."));
         }
 
     }
@@ -80,7 +80,7 @@ public class BaseService<T extends BaseEntity> {
             em.flush();
             return t;
         } catch (Exception e) {
-            throw new BusinessException(e.getLocalizedMessage(), new ErrorMessage("Erro ao atualizar o registro"));
+            throw new BusinessException(e.getLocalizedMessage(), new ErrorMessage("Failure to update record."));
         }
 
     }
@@ -99,10 +99,10 @@ public class BaseService<T extends BaseEntity> {
                 em.remove(bean);
                 em.flush();
             } catch (Exception e) {
-                throw new BusinessException(e.getLocalizedMessage(), new ErrorMessage("Erro ao remover o registro"));
+                throw new BusinessException(e.getLocalizedMessage(), new ErrorMessage("Failure to remove record."));
             }
         } else {
-            throw new BusinessException(null, new ErrorMessage("Registro não encontrado"));
+            throw new BusinessException(null, new ErrorMessage("Failure to remove record. Record not found."));
         }
     }
 

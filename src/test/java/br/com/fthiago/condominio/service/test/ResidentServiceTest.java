@@ -8,7 +8,7 @@ package br.com.fthiago.condominio.service.test;
 
 import br.com.fthiago.condominio.entity.Resident;
 import br.com.fthiago.condominio.exception.BusinessException;
-import br.com.fthiago.condominio.filter.ResidentFilter;
+import br.com.fthiago.condominio.search.ResidentFilter;
 import br.com.fthiago.condominio.service.ResidentService;
 import javax.ejb.EJB;
 import org.jboss.arquillian.container.test.api.Deployment;
