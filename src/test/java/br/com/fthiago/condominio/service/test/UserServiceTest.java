@@ -13,13 +13,14 @@ import br.com.fthiago.condominio.type.UserType;
 import br.com.fthiago.condominio.util.MD5HashUtil;
 import javax.ejb.EJB;
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -47,6 +48,8 @@ public class UserServiceTest {
     
     private static Integer userId;
     
+    private static Integer anotherUserId;    
+    
     @EJB
     private UserService userService;
     
@@ -55,19 +58,41 @@ public class UserServiceTest {
     public void shouldInsertUser() throws BusinessException {
         User user = new User("test", "passwd", UserType.ADMINISTRATOR);
         
+        User anotherUser = new User("test2", "other-passwd", UserType.ADMINISTRATOR);
+        userService.insert(anotherUser);
+        anotherUserId = anotherUser.getId();
+        
         userService.insert(user);
         
         userId = user.getId();
         
         user = userService.find(User.class, userId);
+        anotherUser = userService.find(User.class, anotherUserId);
         
         Assert.assertEquals(userId, user.getId());
         Assert.assertEquals("test", user.getUsername());
         Assert.assertEquals(MD5HashUtil.encript("passwd"), user.getPassword());
+        Assert.assertEquals(anotherUserId, anotherUser.getId());
+        Assert.assertEquals("test2", anotherUser.getUsername());
+        Assert.assertEquals(MD5HashUtil.encript("other-passwd"), anotherUser.getPassword());
+    }
+    
+    @Test(expected = BusinessException.class)
+    @InSequence(2)
+    public void shouldNotInsertUserWithSameUsername() throws BusinessException {
+        User user = new User("test", "passwd-2", UserType.BASIC);
+        
+        userService.insert(user);
     }
     
     @Test
-    @InSequence(2)
+    @InSequence(3)
+    public void shouldFindUserByUsername() {
+        Assert.assertNotNull(userService.findByUsername("test"));
+    }
+    
+    @Test
+    @InSequence(4)
     public void shouldUpdateUser() throws BusinessException {
         User user = userService.find(User.class, userId);
         
@@ -81,8 +106,18 @@ public class UserServiceTest {
         
     }
     
+    @Test(expected = BusinessException.class)
+    @InSequence(5)
+    public void shouldNotUpdateUserWithSameUsernameAsOther() throws BusinessException {
+        User user = userService.find(User.class, userId);
+        
+        user.setUsername("test2");
+        
+        userService.update(user);
+    }
+    
     @Test
-    @InSequence(3)
+    @InSequence(6)
     public void shouldChangePassword() {
         User user = userService.find(User.class, userId);
         
@@ -94,16 +129,18 @@ public class UserServiceTest {
     }
     
     @Test
-    @InSequence(4)
+    @InSequence(7)
     public void shouldReturnAllUsers() throws BusinessException {
         Assert.assertFalse(userService.listAll(User.class).isEmpty());
     }
     
     @Test
-    @InSequence(5)
+    @InSequence(8)
     public void shouldRemoveUser() throws BusinessException {
         userService.remove(User.class, userId);
+        userService.remove(User.class, anotherUserId);
         Assert.assertNull(userService.find(User.class, userId));
+        Assert.assertNull(userService.find(User.class, anotherUserId));
     }
     
 }
