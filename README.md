@@ -19,7 +19,7 @@
 
 3. Create project and test database structure using **init.sql** script located at {{PROJECT\_PATH}}/src/main/sql/init.sql
 
-4. Create an UberJar using ** java -jar {{MVN\_.M2\_PATH}}/repository/fish/payara/extras/payara-micro/4.1.2.181/payara-micro-4.1.2.181.jar --deploy {{PROJECT\_PATH}}/target/condominio-1.0.0-SNAPSHOT.war --domainConfig {{PROJECT\_PATH}}/src/main/config/domain.xml --outputUberJar {{APPLICATION\_NAME}}.jar**
+4. Create an UberJar using **java -jar {{MVN\_.M2\_PATH}}/repository/fish/payara/extras/payara-micro/4.1.2.181/payara-micro-4.1.2.181.jar --deploy {{PROJECT\_PATH}}/target/condominio-1.0.0-SNAPSHOT.war --domainConfig {{PROJECT\_PATH}}/src/main/config/domain.xml --outputUberJar {{APPLICATION\_NAME}}.jar**
 
 5. Run **java -jar {{APPLICATION\_NAME}}.jar**
 
