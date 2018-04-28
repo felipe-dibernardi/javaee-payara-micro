@@ -50,6 +50,18 @@ public class ResidentWS {
     }
 
     /**
+     * Busca um Morador específico pelo identicador.
+     * @param id Id do Morador.
+     * @return Resposta a Requisição.
+     */
+    @GET
+    @Path("{id}")
+    @Produces("application/json")
+    public Response find(@PathParam("id") final Integer id) {
+        return Response.ok().entity(this.residentService.find(Resident.class, id)).build();
+    }
+    
+    /**
      * Busca os Moradores de acordo com parâmetros.
      *
      * @param name Nome do morador.
