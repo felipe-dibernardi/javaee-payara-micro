@@ -235,7 +235,7 @@ Find a User by Id.
 * **Success Response:**
 
   * **Code:** 200 OK
-  * **Content:** [{ id : [numeric], username: [alphanumeric], password : [alphanumeric], type : [string] }]
+  * **Content:** { id : [numeric], username: [alphanumeric], password : [alphanumeric], type : [string] }
 
 * **Error Response:**
 
@@ -262,7 +262,7 @@ Find a User by Username.
 * **Success Response:**
 
   * **Code:** 200 OK
-  * **Content:** [{ id : [numeric], username: [alphanumeric], password : [alphanumeric], type : [string] }]
+  * **Content:** { id : [numeric], username: [alphanumeric], password : [alphanumeric], type : [string] }
 
 * **Error Response:**
 
@@ -287,7 +287,7 @@ Find a User by Username.
    * **Success Response:**
 
      * **Code:** 201 CREATED
-     * **Content:** [{ id : [integer], username: [alphanumeric], password : [alphanumeric], type : [string] }]
+     * **Content:** { id : [integer], username: [alphanumeric], password : [alphanumeric], type : [string] }
 
    * **Error Response:**
 
@@ -314,7 +314,7 @@ Find a User by Username.
    * **Success Response:**
 
      * **Code:** 200 OK
-     * **Content:** [{ id : [integer], username: [alphanumeric], password : [alphanumeric], type : [string] }]
+     * **Content:** { id : [integer], username: [alphanumeric], password : [alphanumeric], type : [string] }
 
    * **Error Response:**
 
