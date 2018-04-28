@@ -5,6 +5,8 @@
  */
 package br.com.fthiago.condominio.exception;
 
+import java.io.Serializable;
+
 /**
  * Classe ErrorMessage
  *
@@ -12,7 +14,7 @@ package br.com.fthiago.condominio.exception;
  *
  * @author Felipe Di Bernardi S Thiago
  */
-public class ErrorMessage {
+public class ErrorMessage implements Serializable {
 
     private String key;
     private String[] args;

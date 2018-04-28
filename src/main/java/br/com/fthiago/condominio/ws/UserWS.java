@@ -20,6 +20,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.Response;
 
@@ -45,6 +46,30 @@ public class UserWS {
     @Produces("application/json")
     public Response listAll() {
         return Response.ok(new GenericEntity<List<User>>(this.userService.listAll(User.class)) {}).build();
+    }
+    
+    /**
+     * Busca um Usuário específico pelo identicador.
+     * @param id Id do Usuário.
+     * @return Resposta a Requisição.
+     */
+    @GET
+    @Path("{id}")
+    @Produces("application/json")
+    public Response find(@PathParam("id") final Integer id) {
+        return Response.ok().entity(this.userService.find(User.class, id)).build();
+    }
+    
+    /**
+     * Busca um Usuário específico pelo Username.
+     * @param username Username do Usuário.
+     * @return Resposta a Requisição.
+     */
+    @GET
+    @Path("/find")
+    @Produces("application/json")
+    public Response findByUsername(@QueryParam("username") final String username) {
+        return Response.ok().entity(this.userService.findByUsername(username)).build();
     }
     
     /**
