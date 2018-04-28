@@ -40,6 +40,19 @@ public class Resident implements BaseEntity {
     
     private String phone;
 
+    public Resident() {
+    }
+
+    public Resident(final String name, final String email, final Integer apartment, final String block, 
+            final String document, final String phone) {
+        this.name = name;
+        this.email = email;
+        this.apartment = apartment;
+        this.block = block;
+        this.document = document;
+        this.phone = phone;
+    }
+
     @Override
     public Integer getId() {
         return id;

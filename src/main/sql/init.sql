@@ -9,9 +9,13 @@
  */
 CREATE SCHEMA condominium;
 
+CREATE SCHEMA condominium_test;
+
 CREATE USER 'condominium'@'localhost' identified by 'c0nd0';
 
 GRANT ALL ON condominium.* TO 'condominium'@'localhost';
+
+GRANT ALL ON condominium_test.* TO 'condominium'@'localhost';
 
 CREATE TABLE condominium.user (
     id INT(11) NOT NULL AUTO_INCREMENT,
@@ -21,7 +25,26 @@ CREATE TABLE condominium.user (
     PRIMARY KEY (id)
 ) ENGINE=InnoDB;
 
+CREATE TABLE condominium_test.user (
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    username VARCHAR(32) NOT NULL,
+    password VARCHAR(64) NOT NULL,
+    type VARCHAR(16) NOT NULL,
+    PRIMARY KEY (id)
+) ENGINE=InnoDB;
+
 CREATE TABLE condominium.resident (
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    name VARCHAR(64) NOT NULL,
+    email VARCHAR(64) NOT NULL,
+    block VARCHAR(8) NOT NULL,
+    apartment INT(5) NOT NULL,
+    document VARCHAR(32),
+    phone VARCHAR(16),
+    PRIMARY KEY (id)
+) ENGINE=InnoDB;
+
+CREATE TABLE condominium_test.resident (
     id INT(11) NOT NULL AUTO_INCREMENT,
     name VARCHAR(64) NOT NULL,
     email VARCHAR(64) NOT NULL,

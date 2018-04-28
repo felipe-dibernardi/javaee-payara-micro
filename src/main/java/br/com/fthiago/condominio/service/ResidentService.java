@@ -46,7 +46,7 @@ public class ResidentService extends BaseService<Resident> {
         }
         
         if (filter.getApartment()!= null) {
-            strQuery.append("AND r.apartment = ").append(filter.getApartment());
+            strQuery.append("AND r.apartment = ").append(filter.getApartment()).append(" ");
         }
         
         if (filter.getDocument() != null && !filter.getDocument().equals("")) {

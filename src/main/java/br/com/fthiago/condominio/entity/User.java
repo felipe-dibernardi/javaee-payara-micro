@@ -37,6 +37,15 @@ public class User implements BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private UserType type;
+
+    public User() {
+    }
+
+    public User(String username, String password, UserType type) {
+        this.username = username;
+        this.password = password;
+        this.type = type;
+    }
     
     @Override
     public Integer getId() {
