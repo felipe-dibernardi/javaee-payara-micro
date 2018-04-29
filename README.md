@@ -6,13 +6,13 @@
 2. **Running instructions**
 3. **API Documentation**
 
-## 1.Setup
+## 1. Setup
 
 * Java 7+ JDK
 * Maven 3+
 * MySQL
 
-## 2.Running Instructions
+## 2. Running Instructions
 
 1. Clone project **git clone https://github.com/felipe-dibernardi/javaee-payara-micro.git**
 
