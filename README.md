@@ -1,4 +1,4 @@
-# JavaEE7 and Payara Micro RESTFul example with Basic Authentication and Arquillian Test Suite
+# JavaEE7, Payara Micro and Docker RESTFul example with Basic Authentication and Arquillian Test Suite
 
 ## Index
 
