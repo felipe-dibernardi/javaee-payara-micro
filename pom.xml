@@ -11,6 +11,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <surefire.version>2.19.1</surefire.version>
+        <artifact.final.name>condominium</artifact.final.name>
     </properties>
     
     <!-- Gerenciador de dependência do Arquillian -->
@@ -178,6 +179,14 @@
                     </compilerArguments>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <warName>${artifact.final.name}</warName>
+                </configuration>
+            </plugin>
             <!-- Surefire Plugin - Unit testing plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -193,6 +202,12 @@
                 <artifactId>maven-dependency-plugin</artifactId>
                 <version>2.6</version>
                 <executions>
+                    <execution>
+                        <id>property-packing</id>
+                        <goals>
+                            <goal>properties</goal>
+                        </goals>
+                    </execution>
                     <execution>
                         <phase>validate</phase>
                         <goals>
@@ -213,6 +228,107 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.5.0</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>fish.payara.extras</groupId>
+                        <artifactId>payara-micro</artifactId>
+                        <version>4.1.2.181</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <id>payara-uber-jar</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>java</executable>
+                            <arguments>
+                                <argument>-jar</argument>
+                                <argument>${fish.payara.extras:payara-micro:jar}</argument>
+                                <argument>--deploy</argument>
+                                <argument>${basedir}/target/${artifact.final.name}.war</argument>
+                                <argument>--outputUberJar</argument>
+                                <argument>${basedir}/target/${artifact.final.name}.jar</argument>
+                                <argument>--domainConfig</argument>
+                                <argument>${basedir}/src/main/config/domain.xml</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.27.1</version>
+
+                <configuration>
+                    <!--<dockerHost>http://127.0.0.1:2375</dockerHost>-->
+                    <!--  this is for Mac and Amazon Linux -->
+                    <!-- <dockerHost>unix:///var/run/docker.sock</dockerHost> -->
+
+                    <verbose>true</verbose>
+
+                    <images>
+                        <image>
+                            <name>felipedibernardi/condominio-webapp</name>
+                            <build>
+                                <dockerFileDir>${project.basedir}/src/main/docker/app/</dockerFileDir>
+
+                                <!--copies Jar to the maven directory (uses Assembly system)-->
+                                <assembly>
+                                    <inline>
+                                        <files>
+                                            <file>
+                                                <source>${basedir}/target/condominium.jar</source>
+                                            </file>
+                                        </files>
+                                    </inline>
+                                </assembly>
+                                <tags>
+                                    <tag>latest</tag>
+                                </tags>
+                            </build>
+                        </image>
+                        <image>
+                            <name>felipedibernardi/condominio-database</name>
+                            <build>
+                                <dockerFileDir>${project.basedir}/src/main/docker/database/</dockerFileDir>
+
+                                <!--copies Jar to the maven directory (uses Assembly system)-->
+                                <assembly>
+                                    <inline>
+                                        <files>
+                                            <file>
+                                                <source>${basedir}/src/main/sql/init.sql</source>
+                                            </file>
+                                        </files>
+                                    </inline>
+                                </assembly>
+                                <tags>
+                                    <tag>latest</tag>
+                                </tags>
+                            </build>
+                        </image>
+                    </images>
+                </configuration>
+
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
         <resources>
             <resource>

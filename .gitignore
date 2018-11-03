@@ -2,3 +2,5 @@ target/
 derby.log
 nb-configuration.xml
 condominio.jar
+*.iml
+.idea

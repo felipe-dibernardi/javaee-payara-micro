@@ -11,22 +11,24 @@
 * Java 7+ JDK
 * Maven 3+
 * MySQL
+* Docker
+* Docker Compose
 
 ## 2. Running Instructions
 
 1. Clone project **git clone https://github.com/felipe-dibernardi/javaee-payara-micro.git**
 
-2. Run **mvn clean install** at pom.xml level folder
+2. Run **mvn clean package** at pom.xml level folder
 
-3. Create project and test database structure using **init.sql** script located at {{PROJECT\_PATH}}/src/main/sql/init.sql
+3. Create test database structure using **init.sql** script located at {{PROJECT\_PATH}}/src/main/sql/init.sql
 
 4. To run Unit tests, use UnitTest profile: **mvn -PUnitTest clean package**
 
-5. Create an UberJar using **java -jar {{MVN\_.M2\_PATH}}/repository/fish/payara/extras/payara-micro/4.1.2.181/payara-micro-4.1.2.181.jar --deploy {{PROJECT\_PATH}}/target/condominio-1.0.0-SNAPSHOT.war --domainConfig {{PROJECT\_PATH}}/src/main/config/domain.xml --outputUberJar {{APPLICATION\_NAME}}.jar**
+5. To run the application go to project root folder and run: **docker-compose up -d**
 
-6. Run **java -jar {{APPLICATION\_NAME}}.jar**
+6. To access the app go to http://localhost/condominium
 
-7. EndPoints will be deployed at context root **localhost:8080/condominio-1.0.0-SNAPSHOT/webresources/**
+7. Because of race conditions inside compose, despite the webapp service dependence on database, it'll start as soons as database is running, and not necessarily when mysql started. If the applications did not start, simply run **docker-compose stop && docker-compose up -d**
 
 ## 3. API Documentation
 

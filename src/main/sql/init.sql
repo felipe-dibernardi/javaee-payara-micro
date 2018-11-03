@@ -13,12 +13,12 @@ CREATE SCHEMA condominium;
 DROP SCHEMA IF EXISTS condominium_test;
 CREATE SCHEMA condominium_test;
 
-DROP USER IF EXISTS 'condominium'@'localhost';
-CREATE USER 'condominium'@'localhost' identified by 'c0nd0';
+DROP USER IF EXISTS 'condominium'@'%';
+CREATE USER 'condominium'@'%' identified by 'c0nd0';
 
-GRANT ALL ON condominium.* TO 'condominium'@'localhost';
+GRANT ALL ON condominium.* TO 'condominium'@'%';
 
-GRANT ALL ON condominium_test.* TO 'condominium'@'localhost';
+GRANT ALL ON condominium_test.* TO 'condominium'@'%';
 
 DROP TABLE IF EXISTS condominium.user;
 CREATE TABLE condominium.user (

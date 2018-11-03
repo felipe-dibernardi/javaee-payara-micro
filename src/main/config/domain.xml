@@ -60,7 +60,7 @@
     <managed-scheduled-executor-service object-type="system-all" jndi-name="concurrent/__defaultManagedScheduledExecutorService"></managed-scheduled-executor-service>
     <managed-thread-factory object-type="system-all" jndi-name="concurrent/__defaultManagedThreadFactory"></managed-thread-factory>
     <jdbc-connection-pool datasource-classname="com.mysql.jdbc.jdbc2.optional.MysqlDataSource" name="condominiumPool" res-type="javax.sql.DataSource">
-      <property name="URL" value="jdbc:mysql://localhost:3306/condominium"></property>
+      <property name="URL" value="jdbc:mysql://database:3306/condominium"></property>
       <property name="user" value="condominium"></property>
       <property name="password" value="c0nd0"></property>
     </jdbc-connection-pool>
